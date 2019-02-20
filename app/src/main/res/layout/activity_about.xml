@@ -39,17 +39,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:text="ID: 162-15-7914"
-                android:fontFamily="serif"
-                android:textColor="@color/colorSubTitle"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
                 android:textStyle="normal"
-                android:text="nazmul15-7914@diu.edu.bd"
+                android:text="najmul.hasan284@gmail.com"
                 android:fontFamily="serif"
                 android:textColor="@color/colorSubTitle"
                 android:layout_marginBottom="25dp"
