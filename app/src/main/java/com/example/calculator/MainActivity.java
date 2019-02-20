@@ -1,7 +1,10 @@
 package com.example.calculator;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -199,49 +202,77 @@ public class MainActivity extends AppCompatActivity {
             _plus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    _value1 = Double.parseDouble(_input.getText() + "");
-                    sum = true;
-                    _input.setText(null);
-                    _text.setText(_value1+" +");
+                    try{
+
+                        _value1 = Double.parseDouble(_input.getText() + "");
+                        sum = true;
+                        _input.setText(null);
+                        _text.setText(_value1+" +");
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                 }
             });
 
             _minus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    _value1 = Double.parseDouble(_input.getText() + "");
-                    sub = true;
-                    _input.setText(null);
-                    _text.setText(_value1+" -");
+
+                    try{
+                        _value1 = Double.parseDouble(_input.getText() + "");
+                        sub = true;
+                        _input.setText(null);
+                        _text.setText(_value1+" -");
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                 }
             });
 
             _mul.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    _value1 = Double.parseDouble(_input.getText() + "");
-                    mul = true;
-                    _input.setText(null);
-                    _text.setText(_value1+" *");
+                    try{
+                        _value1 = Double.parseDouble(_input.getText() + "");
+                        mul = true;
+                        _input.setText(null);
+                        _text.setText(_value1+" *");
+
+                    }catch (NumberFormatException e){
+                        e.printStackTrace();
+                    }
                 }
             });
 
             _div.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    _value1 = Double.parseDouble(_input.getText() + "");
-                    div = true;
-                    _input.setText(null);
-                    _text.setText(_value1+" /");
+
+                    try {
+                        _value1 = Double.parseDouble(_input.getText() + "");
+                        div = true;
+                        _input.setText(null);
+                        _text.setText(_value1+" /");
+                    } catch (NumberFormatException e) {
+                        e.printStackTrace();
+                    }
                 }
             });
 
             _squre.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    _value1 = Double.parseDouble(_input.getText() + "");
+                    try {
+                        _value1 = Double.parseDouble(_input.getText() + "");
 
-                    _input.setText(_value1 * _value1 + "");
+                        _input.setText(_value1 * _value1 + "");
+                        _text.setText("("+_value1+")^2");
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
 
                 }
             });
@@ -249,9 +280,15 @@ public class MainActivity extends AppCompatActivity {
             _root.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    _value1 = Double.parseDouble(_input.getText() + "");
 
-                    _input.setText(sqrt(_value1) + "");
+                    try{
+                        _value1 = Double.parseDouble(_input.getText() + "");
+                        _input.setText(sqrt(_value1) + "");
+                        _text.setText("√("+_value1+")");
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
 
                 }
             });
@@ -259,9 +296,15 @@ public class MainActivity extends AppCompatActivity {
             _power.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    _value1 = Double.parseDouble(_input.getText() + "");
-                    power = true;
-                    _input.setText(null);
+
+                    try {
+                        _value1 = Double.parseDouble(_input.getText() + "");
+                        power = true;
+                        _input.setText(null);
+                    } catch (NumberFormatException e) {
+                        e.printStackTrace();
+                    }
+
                 }
             });
 
@@ -278,10 +321,15 @@ public class MainActivity extends AppCompatActivity {
             _mod.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    _value1 = Double.parseDouble(_input.getText()+"");
-                    mod = true;
-                    _input.setText(null);
-                    _text.setText(_value1+" %");
+
+                    try {
+                        _value1 = Double.parseDouble(_input.getText()+"");
+                        mod = true;
+                        _input.setText(null);
+                        _text.setText(_value1+" %");
+                    } catch (NumberFormatException e) {
+                        e.printStackTrace();
+                    }
 
                 }
             });
@@ -290,16 +338,21 @@ public class MainActivity extends AppCompatActivity {
             _factorial.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    _value1 = Double.parseDouble(_input.getText() + "");
 
-                    double factorial = 1;
-                    int i = 1;
-                    while (i <= _value1) {
-                        factorial = factorial * i;
-                        i++;
+                    try {
+                        _value1 = Double.parseDouble(_input.getText() + "");
+
+                        double factorial = 1;
+                        int i = 1;
+                        while (i <= _value1) {
+                            factorial = factorial * i;
+                            i++;
+                        }
+                        _text.setText(_value1+"!");
+                        _input.setText(String.valueOf(factorial));
+                    } catch (NumberFormatException e) {
+                        e.printStackTrace();
                     }
-                    _text.setText(_value1+"!");
-                    _input.setText(String.valueOf(factorial));
                 }
             });
 
@@ -464,6 +517,21 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.option_menu, menu);
 
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id==R.id.about){
+            Intent aboutIntent=new Intent(getApplicationContext(), About.class);
+            startActivity(aboutIntent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
 
